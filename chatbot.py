@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext
 import re
 import random
-import difflib  # Added for spell-checking
 
 class LoveChatbot:
     def __init__(self):
@@ -40,15 +39,6 @@ class LoveChatbot:
                     return handler(*match.groups())
 
         return self.handle_default(user)
-
-
-        # Fallback mechanism for unmatched messages
-        return self.handle_fallback(user, message)
-
-    def handle_fallback(self, user, message):
-        # Perform keyword-based analysis or other heuristics to understand user intent
-        # You can also integrate more advanced NLP techniques here
-        return f"I'm sorry, my love. I didn't quite catch that. Could you please rephrase?"
 
     def handle_greeting(self):
         return "Hello, my love! How can I make your heart flutter? 💖"
@@ -169,11 +159,6 @@ def get_romantic_line(love_percentage):
         return "Every moment with you is a beautiful chapter in our love story."
     else:
         return "Our love is just beginning, like a blossoming flower."
-    
-# Additional function for spell-checking
-def suggest_correction(word, dictionary):
-    suggestions = difflib.get_close_matches(word, dictionary)
-    return suggestions[0] if suggestions else None
 
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()
@@ -182,10 +167,6 @@ class LoveChatApplication(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self.title("Love Sanctuary.")
-
-        # Load a simple English dictionary for spell-checking
-        self.english_dictionary = set(line.strip().lower() for line in open('C:\Users\Rizwan iitian\OneDrive\Documents\vs code python\python_projects\VaultLinkenglish_dictionary.txt'))  # Replace with a path to your dictionary file
-
 
         # Set window dimensions to full screen
         self.state("zoomed")
@@ -238,20 +219,17 @@ class LoveChatApplication(tk.Tk):
     def send_message(self):
         user_input = self.user_input_entry.get()
 
-        # Spell-checking and suggestion
-        corrected_input = self.correct_spelling(user_input)
-
         # Update history display
-        love_chatbot.save_message("You", corrected_input)
-        response = love_chatbot.respond_to_message("You", corrected_input)
+        love_chatbot.save_message("You", user_input)
+        response = love_chatbot.respond_to_message(user_input)
 
-    def correct_spelling(self, input_text):
-        corrected_words = []
-        for word in input_text.split():
-            corrected_word = suggest_correction(word.lower(), self.english_dictionary)
-            corrected_words.append(corrected_word) if corrected_word else corrected_words.append(word)
-        return ' '.join(corrected_words)
-    
+        self.history_display.config(state="normal")
+        self.history_display.insert(tk.END, f"You: {user_input}\nMy Love: {response}\n")
+        self.history_display.config(state="disabled")
+
+        # Clear user input entry
+        self.user_input_entry.delete(0, tk.END)
+
 # Create an instance of the LoveChatApplication 
 love_app = LoveChatApplication()
 love_app.mainloop()

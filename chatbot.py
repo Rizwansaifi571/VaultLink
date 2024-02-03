@@ -10,6 +10,33 @@ class LoveChatbot:
     def save_message(self, user, message):
         self.conversation_history.append((user, message))
 
+    def respond_to_message(self, message):
+            intent_handlers = {
+                r"(hello|hi|hey)": self.handle_greeting,
+                r"search\s+(.*)": self.handle_search,
+                r"history": self.handle_history,
+                r"advice": self.handle_advice,
+                r"weather": self.handle_weather,
+                r"(exit|goodbye)": self.handle_goodbye,
+                r"(how are you|how do you feel)": self.handle_feelings,
+                r"tell me a joke": self.handle_joke,
+                r"what's your favorite love story": self.handle_love_story,
+                r"compliment me": self.handle_compliment,
+                r"what's your dream date": self.handle_dream_date,
+                r"express your love": self.handle_express_love,
+                r"share a secret": self.handle_secret,
+                r"what's the most romantic place": self.handle_romantic_place,
+                r"write me a love letter": self.handle_love_letter,
+                r"love percentage between (.*) and (.*)": self.handle_love_percentage,
+            }
+
+            for pattern, handler in intent_handlers.items():
+                match = re.match(pattern, message, re.IGNORECASE)
+                if match:
+                    return handler(*match.groups())
+
+            return self.handle_default()
+
     def handle_greeting(self):
         return "Hello, my love! How can I make your heart flutter? 💖"
 
@@ -55,6 +82,7 @@ class LoveChatbot:
 
     def handle_love_letter(self):
         return "My Dearest, Your love is the poetry of my soul, written in the ink of passion. Forever yours, ❤️"
+
 
     def handle_love_percentage(self, names):
         love_percentage = calculate_love_percentage(names[0], names[1])

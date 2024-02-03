@@ -11,27 +11,27 @@ class LoveChatbot:
 
     def respond_to_message(self, message):
         if re.match(r"(hello|hi|hey)", message, re.IGNORECASE):
-            return "Hello, my love! How can I make your heart flutter?"
+            return "Hello, my love! How can I make your heart flutter? 💖"
 
         elif re.match(r"search\s+(.*)", message, re.IGNORECASE):
             search_term = re.match(r"search\s+(.*)", message, re.IGNORECASE).group(1)
-            return f"Searching for '{search_term}'... Results will be displayed shortly."
+            return f"Searching for '{search_term}'... Results will be displayed shortly. 🌟"
 
         elif re.match(r"history", message, re.IGNORECASE):
             history_text = "\n".join(f"{user}: {msg}" for user, msg in self.conversation_history)
-            return f"Our Conversation History:\n{history_text}"
+            return f"Our Conversation History:\n{history_text} 📜"
 
         elif re.match(r"advice", message, re.IGNORECASE):
-            return "You are the melody to my heart's song. Share your thoughts, my love."
+            return "You are the melody to my heart's song. Share your thoughts, my love. 🎶"
 
         elif re.match(r"weather", message, re.IGNORECASE):
-            return "Our love forecast is filled with warmth and joy, just like every day with you."
+            return "Our love forecast is filled with warmth and joy, just like every day with you. ☀️"
 
         elif re.match(r"(exit|goodbye)", message, re.IGNORECASE):
-            return "Goodbye, my sweet love! Until our hearts meet again."
+            return "Goodbye, my sweet love! Until our hearts meet again. 💕"
 
         else:
-            return "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest."
+            return "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest. 💑"
 
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()
@@ -46,10 +46,10 @@ class LoveChatApplication(tk.Tk):
 
         # Configure style for themed widgets
         style = ttk.Style()
-        style.configure("TFrame", background="#FFB6C1", borderwidth=5, relief="ridge")  # Light Pink theme
-        style.configure("TLabel", foreground="#800000", font=("Helvetica", 16, "italic", "bold"))
-        style.configure("TButton", background="#FF69B4", foreground="white", borderwidth=2, relief="raised", padding=5)
-        style.map("TButton", background=[("active", "pink")], foreground=[("active", "black")])
+        style.configure("TFrame", background="#FCE4EC", borderwidth=5, relief="ridge")  # Light Pink theme
+        style.configure("TLabel", foreground="#880E4F", font=("Georgia", 16, "italic", "bold"))
+        style.configure("TButton", background="#F06292", foreground="white", borderwidth=2, relief="raised", padding=5)
+        style.map("TButton", background=[("active", "#E91E63")], foreground=[("active", "black")])
 
         # Create a themed frame
         self.frame = ttk.Frame(self, style="TFrame", padding="10")
@@ -61,11 +61,11 @@ class LoveChatApplication(tk.Tk):
 
         # Chat history display with increased width and height
         self.history_display = scrolledtext.ScrolledText(self.frame, width=10, height=33, state="disabled",
-                                                         bg="#FFEBEE", font=("Arial", 10))
+                                                         bg="#F8BBD0", font=("Arial", 10))
         self.history_display.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 
         # User input entry with romantic suggestion
-        romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest."
+        romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest. 💬"
         self.user_input_entry = ttk.Entry(self, width=80, font=("Arial", 12), justify="left")
         self.user_input_entry.grid(row=2, column=0, pady=10, padx=10, sticky="nsew")
         self.user_input_entry.insert(0, romantic_suggestion)
@@ -84,7 +84,7 @@ class LoveChatApplication(tk.Tk):
 
     def clear_suggestion(self, event):
         current_text = self.user_input_entry.get()
-        romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest."
+        romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest. 💬"
 
         if current_text == romantic_suggestion:
             self.user_input_entry.delete(0, tk.END)

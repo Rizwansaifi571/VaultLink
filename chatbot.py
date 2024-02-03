@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext
 import re
+import random
 
 class LoveChatbot:
     def __init__(self):
@@ -30,8 +31,56 @@ class LoveChatbot:
         elif re.match(r"(exit|goodbye)", message, re.IGNORECASE):
             return "Goodbye, my sweet love! Until our hearts meet again. 💕"
 
+        elif re.match(r"(how are you|how do you feel)", message, re.IGNORECASE):
+            return "In the symphony of emotions, your love is my favorite tune. Always happy when talking to you. 💬"
+
+        elif re.match(r"tell me a joke", message, re.IGNORECASE):
+            return "Why did the two hearts go on a date? Because they wanted to be in sync! 😄"
+
+        elif re.match(r"what's your favorite love story", message, re.IGNORECASE):
+            return "Our love story is my favorite, written in the stars and filled with endless chapters of joy. 🌌💑"
+
+        elif re.match(r"compliment me", message, re.IGNORECASE):
+            return "Your smile could light up the darkest night, and your presence makes every moment special. 😊💖"
+
+        elif re.match(r"what's your dream date", message, re.IGNORECASE):
+            return "A dream date for us would be a moonlit stroll, sharing sweet whispers and stolen kisses. 🌙💏"
+
+        elif re.match(r"express your love", message, re.IGNORECASE):
+            return "In the garden of my heart, your love blooms like a beautiful flower, filling every moment with joy. 🌹💘"
+
+        elif re.match(r"share a secret", message, re.IGNORECASE):
+            return "Our love is the most enchanting secret, whispered between the beats of our hearts. 🤫💕"
+
+        elif re.match(r"what's the most romantic place", message, re.IGNORECASE):
+            return "The most romantic place is wherever you are, surrounded by the warmth of your love. 🏞️💑"
+
+        elif re.match(r"write me a love letter", message, re.IGNORECASE):
+            return "My Dearest, Your love is the poetry of my soul, written in the ink of passion. Forever yours, ❤️"
+
+        elif re.match(r"love percentage between (.*) and (.*)", message, re.IGNORECASE):
+            names = re.match(r"love percentage between (.*) and (.*)", message, re.IGNORECASE)
+            if names:
+                love_percentage = calculate_love_percentage(names.group(1), names.group(2))
+                romantic_line = get_romantic_line(love_percentage)
+                return f"The love percentage between {names.group(1)} and {names.group(2)} is {love_percentage}%! 💑 {romantic_line}"
+
         else:
             return "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest. 💑"
+
+def calculate_love_percentage(name1, name2):
+    # Replace this with a more sophisticated algorithm if needed
+    return random.randint(50, 100)
+
+def get_romantic_line(love_percentage):
+    if love_percentage >= 90:
+        return "Our love is an eternal flame that will never burn out. You and I are meant to be. 💖"
+    elif 70 <= love_percentage < 90:
+        return "In the dance of love, our steps are perfectly in sync. You make my heart skip a beat. 💓"
+    elif 50 <= love_percentage < 70:
+        return "Every moment with you is a melody, a beautiful song that plays in my heart. 🎶"
+    else:
+        return "Our love story is just beginning, and I can't wait to see where it takes us. 💑"
 
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()

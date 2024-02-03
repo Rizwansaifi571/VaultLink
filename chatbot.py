@@ -22,16 +22,16 @@ class LoveChatbot:
             return f"Our Conversation History:\n{history_text}"
 
         elif re.match(r"advice", message, re.IGNORECASE):
-            return "You are my everything. Keep shining like the beautiful star you are!"
+            return "You are the melody to my heart's song. Share your thoughts, my love."
 
         elif re.match(r"weather", message, re.IGNORECASE):
-            return "The forecast for our love is eternal sunshine and endless warmth."
+            return "Our love forecast is filled with warmth and joy, just like every day with you."
 
         elif re.match(r"(exit|goodbye)", message, re.IGNORECASE):
-            return "Goodbye, my sweet love! Until we meet again in our dreams."
+            return "Goodbye, my sweet love! Until our hearts meet again."
 
         else:
-            return "In the dance of life, you are my favorite partner. Share your feelings, my dearest."
+            return "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest."
 
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()
@@ -63,7 +63,7 @@ class LoveChatApplication(tk.Tk):
         self.history_display.grid(row=0, column=0, pady=10, padx=10, sticky="w")
 
         # User input entry with romantic suggestion
-        romantic_suggestion = "In the dance of life, you are my favorite partner. Share your feelings, my dearest."
+        romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest."
         self.user_input_entry = ttk.Entry(self, width=150, font=("Arial", 12), justify="left")
         self.user_input_entry.grid(row=2, column=0, pady=10, padx=10, sticky="w")
         self.user_input_entry.insert(0, romantic_suggestion)
@@ -80,7 +80,7 @@ class LoveChatApplication(tk.Tk):
 
     def clear_suggestion(self, event):
         current_text = self.user_input_entry.get()
-        romantic_suggestion = "In the dance of life, you are my favorite partner. Share your feelings, my dearest."
+        romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest."
 
         if current_text == romantic_suggestion:
             self.user_input_entry.delete(0, tk.END)

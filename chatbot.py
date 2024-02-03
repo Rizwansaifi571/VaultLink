@@ -54,7 +54,7 @@ class LoveChatApplication(tk.Tk):
         self.frame.grid(row=1, column=0, sticky="nsew")
 
         # Title label
-        title_label = ttk.Label(self, text="Love Sanctuary.", style="TLabel")
+        title_label = ttk.Label(self, text="LOVE SANCTUARY.", style="TLabel")
         title_label.grid(row=0, column=0, padx=10, pady=5, sticky="n")
 
         # Chat history display

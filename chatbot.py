@@ -10,8 +10,11 @@ class LoveChatbot:
     def save_message(self, user, message):
         self.conversation_history.append((user, message))
 
-    def respond_to_message(self, message):
-            intent_handlers = {
+    def respond_to_message(self, user, message):
+        if user not in self.user_sessions:
+            self.user_sessions[user] = {}  # Create a new session for the user
+
+        intent_handlers = {
                 r"(hello|hi|hey)": self.handle_greeting,
                 r"search\s+(.*)": self.handle_search,
                 r"history": self.handle_history,
@@ -30,12 +33,12 @@ class LoveChatbot:
                 r"love percentage between (.*) and (.*)": self.handle_love_percentage,
             }
 
-            for pattern, handler in intent_handlers.items():
+        for pattern, handler in intent_handlers.items():
                 match = re.match(pattern, message, re.IGNORECASE)
                 if match:
                     return handler(*match.groups())
 
-            return self.handle_default()
+        return self.handle_default(user)
 
     def handle_greeting(self):
         return "Hello, my love! How can I make your heart flutter? 💖"
@@ -83,6 +86,8 @@ class LoveChatbot:
     def handle_love_letter(self):
         return "My Dearest, Your love is the poetry of my soul, written in the ink of passion. Forever yours, ❤️"
 
+    def handle_default(self):
+        return "In the symphony of love, it seems my tuning slipped a bit. Let's try another note! 🎶"
 
     def handle_love_percentage(self, names):
         love_percentage = calculate_love_percentage(names[0], names[1])
@@ -141,7 +146,7 @@ class LoveChatbot:
             return self.handle_love_percentage(names)
 
         else:
-            return self.handle_feelings()  # Default response
+            return self.handle_default()  # Default response
 
 def calculate_love_percentage(name1, name2):
     random.seed(hash(name1 + name2))
@@ -225,6 +230,6 @@ class LoveChatApplication(tk.Tk):
         # Clear user input entry
         self.user_input_entry.delete(0, tk.END)
 
-# Create an instance of the LoveChatApplication
+# Create an instance of the LoveChatApplication 
 love_app = LoveChatApplication()
 love_app.mainloop()

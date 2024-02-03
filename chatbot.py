@@ -40,7 +40,9 @@ class LoveChatApplication(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self.title("Love Sanctuary.")
-        self.geometry("1350x675")  # Set window dimensions
+
+        # Set window dimensions to full screen
+        self.state("zoomed")
 
         # Configure style for themed widgets
         style = ttk.Style()

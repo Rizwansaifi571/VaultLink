@@ -40,7 +40,7 @@ class LoveChatApplication(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         self.title("Love Sanctuary.")
-        self.geometry("800x500")  # Set window dimensions
+        self.geometry("1350x675")  # Set window dimensions
 
         # Configure style for themed widgets
         style = ttk.Style()
@@ -54,29 +54,31 @@ class LoveChatApplication(tk.Tk):
         self.frame.grid(row=1, column=0, sticky="nsew")
 
         # Title label
-        title_label = ttk.Label(self, text="LOVE SANCTUARY.", style="TLabel")
+        title_label = ttk.Label(self, text="LOVE_SANCTUARY.", style="TLabel")
         title_label.grid(row=0, column=0, padx=10, pady=5, sticky="n")
 
-        # Chat history display
-        self.history_display = scrolledtext.ScrolledText(self.frame, width=60, height=12, state="disabled",
+        # Chat history display with increased width and height
+        self.history_display = scrolledtext.ScrolledText(self.frame, width=10, height=33, state="disabled",
                                                          bg="#FFEBEE", font=("Arial", 10))
-        self.history_display.grid(row=0, column=0, pady=10, padx=10, sticky="w")
+        self.history_display.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 
         # User input entry with romantic suggestion
         romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest."
-        self.user_input_entry = ttk.Entry(self, width=150, font=("Arial", 12), justify="left")
-        self.user_input_entry.grid(row=2, column=0, pady=10, padx=10, sticky="w")
+        self.user_input_entry = ttk.Entry(self, width=80, font=("Arial", 12), justify="left")
+        self.user_input_entry.grid(row=2, column=0, pady=10, padx=10, sticky="nsew")
         self.user_input_entry.insert(0, romantic_suggestion)
         self.user_input_entry.bind("<FocusIn>", self.clear_suggestion)
 
         # Send button
         self.send_button = ttk.Button(self, text="Send", command=self.send_message)
-        self.send_button.grid(row=2, column=1, pady=10, padx=10, sticky="w")
+        self.send_button.grid(row=2, column=1, pady=10, padx=10, sticky="nsew")
 
         # Make the rows and columns expandable
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
         self.frame.columnconfigure(0, weight=1)
+        self.frame.rowconfigure(0, weight=1)
+        self.frame.rowconfigure(2, weight=1)
 
     def clear_suggestion(self, event):
         current_text = self.user_input_entry.get()

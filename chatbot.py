@@ -10,77 +10,122 @@ class LoveChatbot:
     def save_message(self, user, message):
         self.conversation_history.append((user, message))
 
+    def handle_greeting(self):
+        return "Hello, my love! How can I make your heart flutter? 💖"
+
+    def handle_search(self, search_term):
+        return f"Searching for '{search_term}'... Results will be displayed shortly. 🌟"
+
+    def handle_history(self):
+        history_text = "\n".join(f"{user}: {msg}" for user, msg in self.conversation_history)
+        return f"Our Conversation History:\n{history_text} 📜"
+
+    def handle_advice(self):
+        return "You are the melody to my heart's song. Share your thoughts, my love. 🎶"
+
+    def handle_weather(self):
+        return "Our love forecast is filled with warmth and joy, just like every day with you. ☀️"
+
+    def handle_goodbye(self):
+        return "Goodbye, my sweet love! Until our hearts meet again. 💕"
+
+    def handle_feelings(self):
+        return "In the symphony of emotions, your love is my favorite tune. Always happy when talking to you. 💬"
+
+    def handle_joke(self):
+        return "Why did the two hearts go on a date? Because they wanted to be in sync! 😄"
+
+    def handle_love_story(self):
+        return "Our love story is my favorite, written in the stars and filled with endless chapters of joy. 🌌💑"
+
+    def handle_compliment(self):
+        return "Your smile could light up the darkest night, and your presence makes every moment special. 😊💖"
+
+    def handle_dream_date(self):
+        return "A dream date for us would be a moonlit stroll, sharing sweet whispers and stolen kisses. 🌙💏"
+
+    def handle_express_love(self):
+        return "In the garden of my heart, your love blooms like a beautiful flower, filling every moment with joy. 🌹💘"
+
+    def handle_secret(self):
+        return "Our love is the most enchanting secret, whispered between the beats of our hearts. 🤫💕"
+
+    def handle_romantic_place(self):
+        return "The most romantic place is wherever you are, surrounded by the warmth of your love. 🏞️💑"
+
+    def handle_love_letter(self):
+        return "My Dearest, Your love is the poetry of my soul, written in the ink of passion. Forever yours, ❤️"
+
+    def handle_love_percentage(self, names):
+        love_percentage = calculate_love_percentage(names[0], names[1])
+        romantic_line = get_romantic_line(love_percentage)
+        return f"The love percentage between {names[0]} and {names[1]} is {love_percentage}%! 💑 {romantic_line}"
+
     def respond_to_message(self, message):
         if re.match(r"(hello|hi|hey)", message, re.IGNORECASE):
-            return "Hello, my love! How can I make your heart flutter? 💖"
+            return self.handle_greeting()
 
         elif re.match(r"search\s+(.*)", message, re.IGNORECASE):
             search_term = re.match(r"search\s+(.*)", message, re.IGNORECASE).group(1)
-            return f"Searching for '{search_term}'... Results will be displayed shortly. 🌟"
+            return self.handle_search(search_term)
 
         elif re.match(r"history", message, re.IGNORECASE):
-            history_text = "\n".join(f"{user}: {msg}" for user, msg in self.conversation_history)
-            return f"Our Conversation History:\n{history_text} 📜"
+            return self.handle_history()
 
         elif re.match(r"advice", message, re.IGNORECASE):
-            return "You are the melody to my heart's song. Share your thoughts, my love. 🎶"
+            return self.handle_advice()
 
         elif re.match(r"weather", message, re.IGNORECASE):
-            return "Our love forecast is filled with warmth and joy, just like every day with you. ☀️"
+            return self.handle_weather()
 
         elif re.match(r"(exit|goodbye)", message, re.IGNORECASE):
-            return "Goodbye, my sweet love! Until our hearts meet again. 💕"
+            return self.handle_goodbye()
 
         elif re.match(r"(how are you|how do you feel)", message, re.IGNORECASE):
-            return "In the symphony of emotions, your love is my favorite tune. Always happy when talking to you. 💬"
+            return self.handle_feelings()
 
         elif re.match(r"tell me a joke", message, re.IGNORECASE):
-            return "Why did the two hearts go on a date? Because they wanted to be in sync! 😄"
+            return self.handle_joke()
 
         elif re.match(r"what's your favorite love story", message, re.IGNORECASE):
-            return "Our love story is my favorite, written in the stars and filled with endless chapters of joy. 🌌💑"
+            return self.handle_love_story()
 
         elif re.match(r"compliment me", message, re.IGNORECASE):
-            return "Your smile could light up the darkest night, and your presence makes every moment special. 😊💖"
+            return self.handle_compliment()
 
         elif re.match(r"what's your dream date", message, re.IGNORECASE):
-            return "A dream date for us would be a moonlit stroll, sharing sweet whispers and stolen kisses. 🌙💏"
+            return self.handle_dream_date()
 
         elif re.match(r"express your love", message, re.IGNORECASE):
-            return "In the garden of my heart, your love blooms like a beautiful flower, filling every moment with joy. 🌹💘"
+            return self.handle_express_love()
 
         elif re.match(r"share a secret", message, re.IGNORECASE):
-            return "Our love is the most enchanting secret, whispered between the beats of our hearts. 🤫💕"
+            return self.handle_secret()
 
         elif re.match(r"what's the most romantic place", message, re.IGNORECASE):
-            return "The most romantic place is wherever you are, surrounded by the warmth of your love. 🏞️💑"
+            return self.handle_romantic_place()
 
         elif re.match(r"write me a love letter", message, re.IGNORECASE):
-            return "My Dearest, Your love is the poetry of my soul, written in the ink of passion. Forever yours, ❤️"
+            return self.handle_love_letter()
 
         elif re.match(r"love percentage between (.*) and (.*)", message, re.IGNORECASE):
-            names = re.match(r"love percentage between (.*) and (.*)", message, re.IGNORECASE)
-            if names:
-                love_percentage = calculate_love_percentage(names.group(1), names.group(2))
-                romantic_line = get_romantic_line(love_percentage)
-                return f"The love percentage between {names.group(1)} and {names.group(2)} is {love_percentage}%! 💑 {romantic_line}"
+            names = re.match(r"love percentage between (.*) and (.*)", message, re.IGNORECASE).groups()
+            return self.handle_love_percentage(names)
 
         else:
-            return "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest. 💑"
+            return self.handle_feelings()  # Default response
 
 def calculate_love_percentage(name1, name2):
-    # Replace this with a more sophisticated algorithm if needed
-    return random.randint(50, 100)
+    random.seed(hash(name1 + name2))
+    return random.randint(60, 99)
 
 def get_romantic_line(love_percentage):
     if love_percentage >= 90:
-        return "Our love is an eternal flame that will never burn out. You and I are meant to be. 💖"
+        return "Our love is like a fairytale, destined to last forever."
     elif 70 <= love_percentage < 90:
-        return "In the dance of love, our steps are perfectly in sync. You make my heart skip a beat. 💓"
-    elif 50 <= love_percentage < 70:
-        return "Every moment with you is a melody, a beautiful song that plays in my heart. 🎶"
+        return "Every moment with you is a beautiful chapter in our love story."
     else:
-        return "Our love story is just beginning, and I can't wait to see where it takes us. 💑"
+        return "Our love is just beginning, like a blossoming flower."
 
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()

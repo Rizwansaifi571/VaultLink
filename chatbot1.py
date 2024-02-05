@@ -66,14 +66,30 @@ class LoveChatbot:
         return "In the symphony of emotions, your love is my favorite tune. Always happy when talking to you. 💬"
 
     def handle_joke(self):
-        return "Why did the two hearts go on a date? Because they wanted to be in sync! 😄"
+        jokes = [
+            "Why did the two hearts go on a date? Because they wanted to be in sync! 😄",
+            "What did one heart say to the other? You make my heart skip a beat! ❤️",
+            "How did the telephone propose to its girlfriend? It gave her a ring! 📞💍",
+            # Add more jokes as needed
+        ]
+        return random.choice(jokes)
 
     def handle_love_story(self):
-        return "Our love story is my favorite, written in the stars and filled with endless chapters of joy. 🌌💑"
+        stories = [
+            "Our love story is my favorite, written in the stars and filled with endless chapters of joy. 🌌💑",
+            "In the book of love, every page tells the tale of us, a story of passion and devotion. 📖❤️",
+            # Add more love stories as needed
+        ]
+        return random.choice(stories)
 
     def handle_compliment(self):
-        return "Your smile could light up the darkest night, and your presence makes every moment special. 😊💖"
-
+        compliments = [
+            "Your smile could light up the darkest night, and your presence makes every moment special. 😊💖",
+            "If beauty were time, you'd be eternity. 🌟💕",
+            # Add more compliments as needed
+        ]
+        return random.choice(compliments)
+    
     def handle_dream_date(self):
         return "A dream date for us would be a moonlit stroll, sharing sweet whispers and stolen kisses. 🌙💏"
 

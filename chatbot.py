@@ -163,6 +163,7 @@ def get_romantic_line(love_percentage):
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()
 
+
 class LoveChatApplication(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -191,30 +192,34 @@ class LoveChatApplication(tk.Tk):
                                                          bg="#F8BBD0", font=("Arial", 10))
         self.history_display.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 
-        # User input entry with romantic suggestion
-        romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest. 💬"
-        self.user_input_entry = ttk.Entry(self, width=80, font=("Arial", 12), justify="left")
-        self.user_input_entry.grid(row=2, column=0, pady=10, padx=10, sticky="nsew")
-        self.user_input_entry.insert(0, romantic_suggestion)
-        self.user_input_entry.bind("<FocusIn>", self.clear_suggestion)
+        # Suggestions buttons (randomly shuffled)
+        self.suggestions = ["Tell me a joke", "What's your dream date", "Express your love", "Search for..."]
+        random.shuffle(self.suggestions)
+        self.suggestion_buttons = []
+
+        for i, suggestion in enumerate(self.suggestions):
+            button = ttk.Button(self, text=suggestion, command=lambda s=suggestion: self.send_suggestion(s))
+            button.grid(row=i + 2, column=0, pady=5, padx=10, sticky="w")
+            self.suggestion_buttons.append(button)
+
+        # User input entry
+        self.user_input_entry = ttk.Entry(self, width=60, font=("Arial", 12), justify="left")
+        self.user_input_entry.grid(row=len(self.suggestions) + 2, column=0, pady=10, padx=10, sticky="nsew")
 
         # Send button
         self.send_button = ttk.Button(self, text="Send", command=self.send_message)
-        self.send_button.grid(row=2, column=1, pady=10, padx=10, sticky="nsew")
+        self.send_button.grid(row=len(self.suggestions) + 2, column=1, pady=10, padx=10, sticky="nsew")
 
         # Make the rows and columns expandable
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
         self.frame.columnconfigure(0, weight=1)
         self.frame.rowconfigure(0, weight=1)
-        self.frame.rowconfigure(2, weight=1)
+        self.frame.rowconfigure(len(self.suggestions) + 2, weight=1)
 
-    def clear_suggestion(self, event):
-        current_text = self.user_input_entry.get()
-        romantic_suggestion = "In the symphony of emotions, your love is my favorite tune. Share your feelings, my dearest. 💬"
-
-        if current_text == romantic_suggestion:
-            self.user_input_entry.delete(0, tk.END)
+    def send_suggestion(self, suggestion):
+        self.user_input_entry.delete(0, tk.END)
+        self.user_input_entry.insert(0, suggestion)
 
     def send_message(self):
         user_input = self.user_input_entry.get()
@@ -230,6 +235,9 @@ class LoveChatApplication(tk.Tk):
         # Clear user input entry
         self.user_input_entry.delete(0, tk.END)
 
-# Create an instance of the LoveChatApplication 
+# Create an instance of the LoveChatbot
+love_chatbot = LoveChatbot()
+
+# Create an instance of the LoveChatApplication
 love_app = LoveChatApplication()
 love_app.mainloop()

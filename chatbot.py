@@ -184,6 +184,7 @@ def get_romantic_line(love_percentage):
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()
 
+
 class LoveChatApplication(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)

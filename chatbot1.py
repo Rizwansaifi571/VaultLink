@@ -205,9 +205,9 @@ class LoveChatApplication(tk.Tk):
         title_label = ttk.Label(self, text="LoveBot.", font=("Script MT Bold", 20, "italic", "bold"), foreground="#8B0000")
         title_label.grid(row=0, column=0, padx=10, pady=5, sticky="n")
 
-        # Chat history display with increased width and height, and a romantic font
+        # Chat history display with increased width and height, and a different romantic font
         self.history_display = scrolledtext.ScrolledText(self.frame, width=10, height=33, state="disabled",
-                                                         bg="#FFECF5", font=("Edwardian Script ITC", 12))
+                                                         bg="#FFECF5", font=("Courier New", 12))  # Change the font here
         self.history_display.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 
         # Suggestions buttons with a romantic style

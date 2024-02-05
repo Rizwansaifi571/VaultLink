@@ -164,24 +164,31 @@ def get_romantic_line(love_percentage):
 love_chatbot = LoveChatbot()
 
 class LoveChatApplication(tk.Tk):
-    def __init__(self):
+    def __init__(self, love_bot):
         tk.Tk.__init__(self)
-        self.title("Love Sanctuary.")
+        self.title("Love Sanctuary")
 
         # Set window dimensions to full screen
         self.state("zoomed")
 
+        # Configure style for themed widgets
+        style = ttk.Style()
+        style.configure("TFrame", background="#FFCDD2", borderwidth=5, relief="ridge")  # Light Pink theme
+        style.configure("TLabel", foreground="#880E4F", font=("Georgia", 18, "italic", "bold"))
+        style.configure("TButton", background="#F06292", foreground="white", borderwidth=2, relief="raised", padding=5)
+        style.map("TButton", background=[("active", "#E91E63")], foreground=[("active", "black")])
+
         # Create a themed frame
-        self.frame = ttk.Frame(self, padding="10")
+        self.frame = ttk.Frame(self, padding="20", style="TFrame")
         self.frame.grid(row=1, column=0, sticky="nsew")
 
         # Title label
-        title_label = ttk.Label(self, text="LOVE_SANCTUARY.", font=("Georgia", 16, "italic", "bold"))
+        title_label = ttk.Label(self, text="Love Sanctuary", font=("Georgia", 24, "italic", "bold"))
         title_label.grid(row=0, column=0, padx=10, pady=5, sticky="n")
 
         # Chat history display with increased width and height
-        self.history_display = scrolledtext.ScrolledText(self.frame, width=10, height=33, state="disabled",
-                                                         bg="#F8BBD0", font=("Arial", 10))
+        self.history_display = scrolledtext.ScrolledText(self.frame, width=10, height=20, state="disabled",
+                                                         bg="#FFEBEE", font=("Arial", 14))
         self.history_display.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 
         # Suggestions buttons (randomly shuffled)
@@ -195,7 +202,7 @@ class LoveChatApplication(tk.Tk):
             self.suggestion_buttons.append(button)
 
         # User input entry
-        self.user_input_entry = ttk.Entry(self, width=60, font=("Arial", 12), justify="left")
+        self.user_input_entry = ttk.Entry(self, width=60, font=("Arial", 14), justify="left")
         self.user_input_entry.grid(row=len(self.suggestions) + 2, column=0, pady=10, padx=10, sticky="nsew")
 
         # Send button
@@ -217,18 +224,18 @@ class LoveChatApplication(tk.Tk):
         user_input = self.user_input_entry.get()
 
         # Update history display
-        love_chatbot.save_message("You", user_input)
-        response = love_chatbot.respond_to_message(user_input)
+        love_bot.save_message("You", user_input)
+        response = love_bot.respond_to_message(user_input)
 
         self.history_display.config(state="normal")
-        self.history_display.insert(tk.END, f"You: {user_input}\nMy Love: {response}\n")
+        self.history_display.insert(tk.END, f"You: {user_input}\nLoveBot: {response}\n")
         self.history_display.config(state="disabled")
 
         # Clear user input entry
         self.user_input_entry.delete(0, tk.END)
 
-# Create an instance of the LoveChatbot
-love_chatbot = LoveChatbot()
+# Create an instance of the LoveBot
+love_bot = LoveBot()
 
 # Create an instance of the LoveChatApplication
 love_app = LoveChatApplication()

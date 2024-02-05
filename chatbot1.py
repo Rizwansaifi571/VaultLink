@@ -131,10 +131,10 @@ class LoveChatbot:
         ]
         return random.choice(defaults)
     
-    def handle_love_percentage(self, names):
-        love_percentage = calculate_love_percentage(names[0], names[1])
+    def handle_love_percentage(self, name1, name2):
+        love_percentage = calculate_love_percentage(name1, name2)
         romantic_line = get_romantic_line(love_percentage)
-        return f"The love percentage between {names[0]} and {names[1]} is {love_percentage}%! 💑 {romantic_line}"
+        return f"The love percentage between {name1} and {name2} is {love_percentage}%! 💑 {romantic_line}"
 
     def respond_to_message(self, message):
         if re.match(r"(hello|hi|hey)", message, re.IGNORECASE):

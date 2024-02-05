@@ -163,7 +163,6 @@ def get_romantic_line(love_percentage):
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()
 
-
 class LoveChatApplication(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -172,19 +171,12 @@ class LoveChatApplication(tk.Tk):
         # Set window dimensions to full screen
         self.state("zoomed")
 
-        # Configure style for themed widgets
-        style = ttk.Style()
-        style.configure("TFrame", background="#FCE4EC", borderwidth=5, relief="ridge")  # Light Pink theme
-        style.configure("TLabel", foreground="#880E4F", font=("Georgia", 16, "italic", "bold"))
-        style.configure("TButton", background="#F06292", foreground="white", borderwidth=2, relief="raised", padding=5)
-        style.map("TButton", background=[("active", "#E91E63")], foreground=[("active", "black")])
-
         # Create a themed frame
-        self.frame = ttk.Frame(self, style="TFrame", padding="10")
+        self.frame = ttk.Frame(self, padding="10")
         self.frame.grid(row=1, column=0, sticky="nsew")
 
         # Title label
-        title_label = ttk.Label(self, text="LOVE_SANCTUARY.", style="TLabel")
+        title_label = ttk.Label(self, text="LOVE_SANCTUARY.", font=("Georgia", 16, "italic", "bold"))
         title_label.grid(row=0, column=0, padx=10, pady=5, sticky="n")
 
         # Chat history display with increased width and height

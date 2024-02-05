@@ -210,44 +210,49 @@ class LoveChatApplication(tk.Tk):
         random.shuffle(self.suggestions)
         self.suggestion_buttons = []
 
-        # Additional romantic suggestions
         additional_suggestions = [
-            "Share your favorite romantic quote",
-            "Describe our dream wedding",
-            "What's your idea of a perfect sunset together?",
-            "Create a love playlist for us",
-            "Tell me about the first time you knew you were in love",
-            "What's the most romantic gesture you can think of?",
-            "If our love story was a movie, what would the title be?",
+            "Favorite memory",
+            "Sing a love song",
+            "Send virtual hug",
+            "Plan our date",
+            "Send a kiss",
+            "Love percentage between [your name] and [your partner's name]",
+            "Tell me a secret",
+            "What's the most romantic place",
+            "Express your love",
+            "Write me a love letter",
         ]
 
-        # Combine existing and additional suggestions
-        all_suggestions = self.suggestions + additional_suggestions
-        random.shuffle(all_suggestions)
+        # Extend existing suggestions with additional ones
+        self.suggestions.extend(additional_suggestions)
+        random.shuffle(self.suggestions)
 
-        # Suggestions buttons (vertically aligned, occupying 3 rows)
-        self.suggestion_buttons = []
-        for i, suggestion in enumerate(all_suggestions):
-            row = 2 + (i // 4) * 3  # Vertically occupy 3 rows
-            col = i % 4  # Place the suggestion in columns of 4
+        # Update existing suggestion buttons with new suggestions
+        for i, suggestion in enumerate(self.suggestions):
             button = ttk.Button(self, text=suggestion, command=lambda s=suggestion: self.send_suggestion(s))
-            button.grid(row=row, column=col, pady=5, padx=10, sticky="w")
+            button.grid(row=i + 2, column=0, pady=5, padx=10, sticky="w")
+
+            # Limit the number of buttons to avoid overcrowding
+            if i >= 8:
+                break
+
             self.suggestion_buttons.append(button)
+
 
         # User input entry
         self.user_input_entry = ttk.Entry(self, width=60, font=("Arial", 12), justify="left")
-        self.user_input_entry.grid(row=row + 3, column=0, pady=10, padx=10, sticky="nsew")
+        self.user_input_entry.grid(row=len(self.suggestions) + 2, column=0, pady=10, padx=10, sticky="nsew")
 
         # Send button
         self.send_button = ttk.Button(self, text="Send", command=self.send_message)
-        self.send_button.grid(row=row + 3, column=1, pady=10, padx=10, sticky="nsew")
+        self.send_button.grid(row=len(self.suggestions) + 2, column=1, pady=10, padx=10, sticky="nsew")
 
         # Make the rows and columns expandable
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
         self.frame.columnconfigure(0, weight=1)
         self.frame.rowconfigure(0, weight=1)
-        self.frame.rowconfigure(row + 3, weight=1)
+        self.frame.rowconfigure(len(self.suggestions) + 2, weight=1)
 
     def send_suggestion(self, suggestion):
         self.user_input_entry.delete(0, tk.END)

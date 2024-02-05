@@ -234,7 +234,14 @@ class LoveChatApplication(tk.Tk):
         # Suggestions buttons with a romantic style
         self.suggestion_buttons = []
 
-        for i, suggestion in enumerate(["Tell me a joke", "What's your dream date", "Express your love", "Search for..."]):
+        suggestions=[ "Tell me a joke", "What's your dream date", "Express your love", "Search for...",
+            "Share a secret", "Sing a love song", "Plan our date", "Send a kiss", "Favorite memory",
+            "Love percentage between...", "Advice", "Weather", "Exit"]
+        
+        # Choose 3 suggestions randomly
+        selected_suggestions = random.sample(suggestions, 3)
+
+        for i, suggestion in enumerate(selected_suggestions):
             button = ttk.Button(self, text=suggestion, command=lambda s=suggestion: self.send_suggestion(s),
                                 style="Romantic.TButton")
             button.grid(row=i + 2, column=0, pady=5, padx=10, sticky="w")

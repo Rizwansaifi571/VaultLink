@@ -234,9 +234,12 @@ class LoveChatApplication(tk.Tk):
         # Suggestions buttons with a romantic style
         self.suggestion_buttons = []
 
-        suggestions=[ "Tell me a joke", "What's your dream date", "Express your love", "Search for...",
-            "Share a secret", "Sing a love song", "Plan our date", "Send a kiss", "Favorite memory",
-            "Love percentage between...", "Advice", "Weather", "Exit"]
+        suggestions = ["Tell me a joke", "What's your dream date", "Express your love", "Search for...",
+               "Share a secret", "Sing a love song", "Plan our date", "Send a kiss", "Favorite memory",
+               "Love percentage between...", "Advice", "Weather", "Exit",
+               "Write me a love letter", "Tell me a secret", "Compliment me", "History",
+               "What's the most romantic place", "Send virtual hug", "Favorite love story", "How are you?"]
+
         
         # Choose 3 suggestions randomly
         selected_suggestions = random.sample(suggestions, 3)

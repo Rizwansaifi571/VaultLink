@@ -11,27 +11,30 @@ class LoveChatbot:
         self.conversation_history.append((user, message))
 
     def respond_to_message(self, user, message):
-        if user not in self.user_sessions:
-            self.user_sessions[user] = {}  # Create a new session for the user
-
         intent_handlers = {
-                r"(hello|hi|hey)": self.handle_greeting,
-                r"search\s+(.*)": self.handle_search,
-                r"history": self.handle_history,
-                r"advice": self.handle_advice,
-                r"weather": self.handle_weather,
-                r"(exit|goodbye)": self.handle_goodbye,
-                r"(how are you|how do you feel)": self.handle_feelings,
-                r"tell me a joke": self.handle_joke,
-                r"what's your favorite love story": self.handle_love_story,
-                r"compliment me": self.handle_compliment,
-                r"what's your dream date": self.handle_dream_date,
-                r"express your love": self.handle_express_love,
-                r"share a secret": self.handle_secret,
-                r"what's the most romantic place": self.handle_romantic_place,
-                r"write me a love letter": self.handle_love_letter,
-                r"love percentage between (.*) and (.*)": self.handle_love_percentage,
-            }
+            r"(hello|hi|hey)": self.handle_greeting,
+            r"search\s+(.*)": self.handle_search,
+            r"history": self.handle_history,
+            r"advice": self.handle_advice,
+            r"weather": self.handle_weather,
+            r"(exit|goodbye)": self.handle_goodbye,
+            r"(how are you|how do you feel)": self.handle_feelings,
+            r"tell me a joke": self.handle_joke,
+            r"what's your favorite love story": self.handle_love_story,
+            r"compliment me": self.handle_compliment,
+            r"what's your dream date": self.handle_dream_date,
+            r"express your love": self.handle_express_love,
+            r"share a secret": self.handle_secret,
+            r"what's the most romantic place": self.handle_romantic_place,
+            r"write me a love letter": self.handle_love_letter,
+            r"love percentage between (.*) and (.*)": self.handle_love_percentage,
+            r"tell me a secret": self.handle_tell_secret,
+            r"favorite memory": self.handle_favorite_memory,
+            r"sing a love song": self.handle_sing_love_song,
+            r"send virtual hug": self.handle_virtual_hug,
+            r"plan our date": self.handle_plan_date,
+            r"send a kiss": self.handle_send_kiss,
+        }
 
         for pattern, handler in intent_handlers.items():
                 match = re.match(pattern, message, re.IGNORECASE)
@@ -85,6 +88,24 @@ class LoveChatbot:
 
     def handle_love_letter(self):
         return "My Dearest, Your love is the poetry of my soul, written in the ink of passion. Forever yours, ❤️"
+
+    def handle_tell_secret(self):
+        return "I have a secret, but it's safe with you. Our love is the key to unlocking the mysteries of the heart. 🗝️💘"
+
+    def handle_favorite_memory(self):
+        return "One of my favorite memories is the first time our hearts whispered to each other. 💞✨"
+
+    def handle_sing_love_song(self):
+        return "La la la, our love is a beautiful melody, echoing through the symphony of life. 🎶💕"
+
+    def handle_virtual_hug(self):
+        return "Sending you a warm, virtual hug. Feel the love wrapped around you. 🤗💖"
+
+    def handle_plan_date(self):
+        return "Let's plan a magical date filled with laughter, joy, and the magic of our love. ✨🌟"
+
+    def handle_send_kiss(self):
+        return "Blowing you a thousand kisses, each filled with the sweetness of my love. 😘💋"
 
     def handle_default(self):
         return "In the symphony of love, it seems my tuning slipped a bit. Let's try another note! 🎶"

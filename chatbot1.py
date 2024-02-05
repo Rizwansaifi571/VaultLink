@@ -184,6 +184,7 @@ def get_romantic_line(love_percentage):
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()
 
+
 class LoveChatApplication(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -193,53 +194,41 @@ class LoveChatApplication(tk.Tk):
         self.state("zoomed")
 
         # Create a themed frame
-        self.frame = ttk.Frame(self, padding="10")
+        self.frame = ttk.Frame(self, padding="10", style="Romantic.TFrame")
         self.frame.grid(row=1, column=0, sticky="nsew")
 
-        # Title label
-        title_label = ttk.Label(self, text="LoveBot.", font=("Georgia", 16, "italic", "bold"))
+        # Configure style for the frame with a romantic background color and border
+        self.style = ttk.Style()
+        self.style.configure("Romantic.TFrame", background="#FFB6C1", borderwidth=5, relief="ridge")
+
+        # Title label with a romantic font and color
+        title_label = ttk.Label(self, text="LoveBot.", font=("Script MT Bold", 20, "italic", "bold"), foreground="#8B0000")
         title_label.grid(row=0, column=0, padx=10, pady=5, sticky="n")
 
-        # Chat history display with increased width and height
+        # Chat history display with increased width and height, and a romantic font
         self.history_display = scrolledtext.ScrolledText(self.frame, width=10, height=33, state="disabled",
-                                                         bg="#F8BBD0", font=("Arial", 10))
+                                                         bg="#FFECF5", font=("Edwardian Script ITC", 12))
         self.history_display.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 
-        # Suggestions buttons (randomly shuffled)
-        self.suggestions = ["Tell me a joke", "What's your dream date", "Express your love", "Search for..."]
-        random.shuffle(self.suggestions)
+        # Suggestions buttons with a romantic style
         self.suggestion_buttons = []
 
-        additional_suggestions = [
-            "Favorite memory",
-            "Sing a love song",
-            "Send virtual hug",
-            "Plan our date",
-            "Send a kiss",
-            "Love percentage between [your name] and [your partner's name]",
-            "Tell me a secret",
-            "What's the most romantic place",
-            "Express your love",
-            "Write me a love letter",
-        ]
-
-        # Extend existing suggestions with additional ones
-        self.suggestions.extend(additional_suggestions)
-        random.shuffle(self.suggestions)
-
-        # Update existing suggestion buttons with new suggestions
-        for i, suggestion in enumerate(self.suggestions[:3]):  # Display only the first 3 suggestions
-            button = ttk.Button(self, text=suggestion, command=lambda s=suggestion: self.send_suggestion(s))
+        for i, suggestion in enumerate(["Tell me a joke", "What's your dream date", "Express your love", "Search for..."]):
+            button = ttk.Button(self, text=suggestion, command=lambda s=suggestion: self.send_suggestion(s),
+                                style="Romantic.TButton")
             button.grid(row=i + 2, column=0, pady=5, padx=10, sticky="w")
             self.suggestion_buttons.append(button)
 
-        # User input entry
-        self.user_input_entry = ttk.Entry(self, width=60, font=("Arial", 12), justify="left")
+        # User input entry with a romantic font
+        self.user_input_entry = ttk.Entry(self, width=60, font=("Lucida Handwriting", 12), justify="left")
         self.user_input_entry.grid(row=5, column=0, pady=10, padx=10, sticky="nsew")
 
-        # Send button
-        self.send_button = ttk.Button(self, text="Send", command=self.send_message)
+        # Send button with a romantic style
+        self.send_button = ttk.Button(self, text="Send", command=self.send_message, style="Romantic.TButton")
         self.send_button.grid(row=5, column=1, pady=10, padx=10, sticky="nsew")
+
+        # Configure style for the buttons with a romantic background color and border
+        self.style.configure("Romantic.TButton", background="#FFB6C1", borderwidth=2, relief="groove", font=("Lucida Calligraphy", 12))
 
         # Make the rows and columns expandable
         self.rowconfigure(1, weight=1)

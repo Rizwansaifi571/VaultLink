@@ -124,8 +124,13 @@ class LoveChatbot:
         return "Blowing you a thousand kisses, each filled with the sweetness of my love. 😘💋"
 
     def handle_default(self):
-        return "In the symphony of love, it seems my tuning slipped a bit. Let's try another note! 🎶"
-
+        defaults = [
+            "In the symphony of love, it seems my tuning slipped a bit. Let's try another note! 🎶",
+            "I'm lost in the language of love, and sometimes I speak in emojis! 😅💬",
+            # Add more default responses as needed
+        ]
+        return random.choice(defaults)
+    
     def handle_love_percentage(self, names):
         love_percentage = calculate_love_percentage(names[0], names[1])
         romantic_line = get_romantic_line(love_percentage)

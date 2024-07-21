@@ -185,7 +185,8 @@ class LoveChatbot:
 
         elif re.match(r"love percentage between (.*) and (.*)", message, re.IGNORECASE):
             names = re.match(r"love percentage between (.*) and (.*)", message, re.IGNORECASE).groups()
-            return self.handle_love_percentage(names)
+            return self.handle_love_percentage(*names)
+
 
         else:
             return self.handle_default()  # Default response
@@ -207,8 +208,9 @@ love_chatbot = LoveChatbot()
 
 
 class LoveChatApplication(tk.Tk):
-    def __init__(self):
-        tk.Tk.__init__(self)
+    def __init__(self, chatbot):
+        super().__init__()
+        self.chatbot = chatbot
         self.title("Love Sanctuary.")
 
         # Set window dimensions to full screen
@@ -273,22 +275,26 @@ class LoveChatApplication(tk.Tk):
         self.user_input_entry.insert(0, suggestion)
 
     def send_message(self):
-        user_input = self.user_input_entry.get()
+        user_input = self.user_input_entry.get().strip()
 
-        # Update history display
-        love_chatbot.save_message("You", user_input)
-        response = love_chatbot.respond_to_message(user_input)
+        if user_input:
+            # Save user's message
+            self.chatbot.save_message("You", user_input)
 
-        self.history_display.config(state="normal")
-        self.history_display.insert(tk.END, f"You: {user_input}\nMy Love: {response}\n")
-        self.history_display.config(state="disabled")
+            # Get response from the chatbot
+            response = self.chatbot.respond_to_message(user_input)
 
-        # Clear user input entry
-        self.user_input_entry.delete(0, tk.END)
+            # Update history display
+            self.history_display.config(state="normal")
+            self.history_display.insert(tk.END, f"You: {user_input}\nMy Love: {response}\n")
+            self.history_display.config(state="disabled")
+
+            # Clear user input entry
+            self.user_input_entry.delete(0, tk.END)
 
 # Create an instance of the LoveChatbot
 love_chatbot = LoveChatbot()
 
 # Create an instance of the LoveChatApplication
-love_app = LoveChatApplication()
+love_app = LoveChatApplication(love_chatbot)
 love_app.mainloop()
